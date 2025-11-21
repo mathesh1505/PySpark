@@ -56,3 +56,36 @@ SparkSession is the entry point to PySpark functionality.You cannot use DataFram
 * SQLContext
 # 4.2 Configuring and creating a SparkSession. 
 <img width="837" height="136" alt="image" src="https://github.com/user-attachments/assets/39ed8ec3-539d-4a54-839e-0cfadd6531bc" />
+
+# 5 DataFrame API in PySpark:
+# 5.1 Overview of the DataFrame API
+A PySpark DataFrame is a distributed table consisting of rows and columns, similar to SQL or Pandas DataFrame — but optimized for big data and parallel processing.
+# Key Features:
+* Schema-based (column names + data types)
+* Distributed (works across multiple nodes)
+* Optimized using Catalyst Optimizer
+* Lazy evaluation
+* Supports SQL-like operations (select, filter, groupBy)
+* Can handle terabytes of data
+# 5.2 Comparison: PySpark DataFrame vs Pandas DataFrame
+| Feature             | PySpark DataFrame             | Pandas DataFrame                  |
+| ------------------- | ----------------------------- | --------------------------------- |
+| **Execution**       | Distributed, parallel         | Single machine                    |
+| **Data Size**       | Huge datasets (GB–TB–PB)      | Small datasets (fits in RAM)      |
+| **Speed**           | Faster for big data           | Faster for small data             |
+| **Memory**          | Uses cluster memory           | Uses local RAM                    |
+| **API Style**       | SQL + functional              | Pythonic, row-wise                |
+| **Lazy Evaluation** | Yes                           | No (runs immediately)             |
+| **Optimization**    | Catalyst optimizer            | No optimizer                      |
+| **Fault Tolerance** | Yes (using RDD lineage)       | No                                |
+| **Best For**        | Big data, ETL, distributed ML | Small/medium data, quick analysis |
+# 6 Transformations and Actions in PySpark:
+# 6.1 Understanding Transformations and Actions:
+Transformations are operations that create a new RDD/DataFrame from an existing one.They are lazy, meaning Spark does not compute the result immediately.
+# Two Types of Transformations
+* Narrow Transformations:No data shuffle,Fast.Example: map, filter, select
+* Wide Transformations:Requires data shuffle between nodes,Slower,Example: groupBy, reduceByKey, join
+  
+Actions trigger execution of the transformations and return the output to driver (collect),count(),show().
+Spark runs the whole DAG only when an action is called.
+# 6.2 Examples of Common Transformations and Actions:
