@@ -89,3 +89,36 @@ Transformations are operations that create a new RDD/DataFrame from an existing 
 Actions trigger execution of the transformations and return the output to driver (collect),count(),show().
 Spark runs the whole DAG only when an action is called.
 # 6.2 Examples of Common Transformations and Actions:
+# 7 Revision on Spark RDDs:
+# 7.1 Overview of RDDs in PySpark
+RDD (Resilient Distributed Dataset) is the fundamental data structure in Spark.It is a distributed collection of data, processed in parallel across multiple nodes in a cluster.
+# 7.2 Differences between RDDs and DataFrames:
+| Feature             | RDD                                        | DataFrame                         |
+| ------------------- | ------------------------------------------ | --------------------------------- |
+| **Definition**      | Low-level distributed data structure       | High-level tabular data structure |
+| **Schema**          | No schema (unstructured)                   | Has schema (columns + datatypes)  |
+| **Ease of Use**     | Complex (requires custom code)             | Very easy (SQL-like operations)   |
+| **Optimization**    | No optimization                            | Optimized by Catalyst optimizer   |
+| **Speed**           | Slower                                     | Much faster                       |
+| **Memory Usage**    | High                                       | Low (uses Tungsten engine)        |
+| **APIs Supported**  | Only functional (map, filter, reduce)      | SQL, DataFrame, MLlib             |
+| **Error Handling**  | Harder (no schema)                         | Easier (schema validation)        |
+| **Use Cases**       | Unstructured data, complex transformations | Structured data, analytics, ETL   |
+| **Lazy Evaluation** | Yes                                        | Yes                               |
+
+# 8 Data Structures in PySpark:
+PySpark mainly works with the following distributed data structures:
+* RDD (Resilient Distributed Dataset)
+* DataFrame
+* Row
+* Column
+# 9 SparkContext:
+SparkContext is the core entry point for low-level Spark functionality.It allows you to work with RDDs, manage cluster resources, and communicate with the Spark cluster.Today, most applications use SparkSession, but SparkContext still exists inside SparkSession and is used for RDD operations.
+# 9.1 The Role of SparkContext in PySpark Applications:
+It is the main entry point to Spark's lower-level API (RDD API).
+It connects your PySpark application to the Spark cluster.
+It is responsible for:
+* Creating RDDs
+* Managing workers/executors
+* Distributing tasks
+* Coordinating jobs and stages
