@@ -148,3 +148,31 @@ It is responsible for:
 * Managing workers/executors
 * Distributing tasks
 * Coordinating jobs and stages
+# 10 PySpark DataFrames:
+10.1 Introduction to PySpark DataFrames
+A DataFrame in PySpark is a distributed collection of data organized into named columns, similar to a table in a database or an Excel sheet.
+* It is built on top of the Spark SQL engine, meaning:
+* It supports SQL queries
+* It automatically handles optimizations using Catalyst Optimizer
+* It is faster than RDDs due to optimized execution
+# 11 Pyspark SQL:
+PySpark SQL allows you to write SQL queries on DataFrames.
+11.1 Integration of SQL Queries with PySpark
+* Run SQL queries
+* Create temporary views
+* Join DataFrames using SQL
+* Use functions (SUM, AVG, COUNT, etc.)
+* Work with complex data at scale
+# 11.2 Registering DataFrames as Temporary SQL Tables:
+To run SQL queries, you must register the DataFrame as a temporary view.
+# 11.3 Techniques for caching and persisting RDDs and DataFrames.
+PySpark uses lazy evaluation, meaning transformations are not executed until an action is called. When a DataFrame/RDD is used multiple times, Spark can recompute it repeatedly, which is expensive.
+To avoid recomputation, Spark provides cache() and persist() to store RDD/DataFrame in memory or disk.
+# Cache():
+cache() is a shorthand for persisting the data in memory only.
+# How it works:
+* When you call df.cache(), Spark marks the DataFrame to be stored in memory.
+* The first action triggers the computation and stores partitions in memory.
+* Future actions will reuse the cached data → faster.
+# persist():
+persist() allows you to specify the storage level (memory, disk, serialization).
