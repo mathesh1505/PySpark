@@ -212,3 +212,8 @@ persist() allows you to specify the storage level (memory, disk, serialization).
 | describe()         | Summary statistics         |
 | columns            | List of column names       |
 
+# Printschema,describe:
+
+<img width="701" height="532" alt="Screenshot 2025-11-25 111009" src="https://github.com/user-attachments/assets/d9eb3345-486f-4beb-bb89-de327f2995e4" />
+
+<img width="806" height="505" alt="Screenshot 2025-11-25 111023" src="https://github.com/user-attachments/assets/9c27e177-aee0-488b-ace1-e34b1f3567b2" />
