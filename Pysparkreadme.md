@@ -232,7 +232,6 @@ from pyspark.sql.functions import upper
 Df.withColumn("UpperName", upper(col("name")))
 ```
 
----
 
 ### **14.2 trim()**
 
@@ -240,19 +239,14 @@ Removes both leading and trailing spaces.
 
 **Example:** `trim(col("name"))`
 
----
 
 ### **14.3 ltrim()**
 
 Removes leading (left) spaces.
 
----
-
 ### **14.4 rtrim()**
 
 Removes trailing (right) spaces.
-
----
 
 ### **14.5 substring_index()**
 
@@ -261,16 +255,12 @@ Extracts substring before/after a delimiter based on position.
 **Example:**
 `substring_index(col("email"), "@", 1)` → returns string before '@'.
 
----
-
 ### **14.6 substring()**
 
 Extracts substring from a given position with length.
 
 **Example:**
 `substring(col("name"), 1, 3)` → first 3 characters.
-
----
 
 ### **14.7 split()**
 
@@ -279,8 +269,6 @@ Splits a string into an array by the given delimiter.
 **Example:**
 `split(col("address"), ",")`
 
----
-
 ### **14.8 repeat()**
 
 Repeats a string N times.
@@ -288,7 +276,6 @@ Repeats a string N times.
 **Example:**
 `repeat(col("category"), 3)`
 
----
 
 ### **14.9 rpad()**
 
@@ -297,16 +284,12 @@ Pads the right side of a string until a fixed length.
 **Example:**
 `rpad(col("code"), 6, "0")`
 
----
-
 ### **14.10 lpad()**
 
 Pads the left side of a string.
 
 **Example:**
 `lpad(col("code"), 6, "0")`
-
----
 
 ### **14.11 regex_replace()**
 
@@ -315,13 +298,9 @@ Replaces a substring that matches a regex.
 **Example:**
 `regex_replace(col("phone"), "-", "")`
 
----
-
 ### **14.12 lower()**
 
 Converts all characters to lowercase.
-
----
 
 ### **14.13 regex_extract()**
 
@@ -330,16 +309,12 @@ Extracts substring using regex pattern.
 **Example:**
 `regex_extract(col("email"), "(.*)@", 1)`
 
----
-
 ### **14.14 length()**
 
 Returns length of a string.
 
 **Example:**
 `length(col("name"))`
-
----
 
 ### **14.15 instr()**
 
@@ -348,16 +323,12 @@ Finds position of a substring in a string.
 **Example:**
 `instr(col("email"), "@");`
 
----
-
 ### **14.16 initcap()**
 
 Converts first letter of each word to uppercase.
 
 **Example:**
 `initcap(col("full_name"))`
-
----
 
 <img width="1099" height="661" alt="Screenshot 2025-11-25 181643" src="https://github.com/user-attachments/assets/6f2ad8e7-9ed3-4b25-8170-93cf4e89da56" />
 
@@ -370,25 +341,18 @@ Returns the sum of values.
 **Example:**
 `df.groupBy().sum("salary")`
 
----
 
 ### **15.2 AVG()**
 
 Returns average value.
 
----
-
 ### **15.3 MIN()**
 
 Returns minimum value.
 
----
-
 ### **15.4 MAX()**
 
 Returns maximum value.
-
----
 
 ### **15.5 ROUND()**
 
