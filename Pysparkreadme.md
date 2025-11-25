@@ -165,7 +165,10 @@ PySpark SQL allows you to write SQL queries on DataFrames.
 * Work with complex data at scale
 # 11.2 Registering DataFrames as Temporary SQL Tables:
 To run SQL queries, you must register the DataFrame as a temporary view.
-# 11.3 Techniques for caching and persisting RDDs and DataFrames.
+
+<img width="861" height="596" alt="Screenshot 2025-11-25 103411" src="https://github.com/user-attachments/assets/5037d9d9-06bf-4a15-a0d6-b1c70ba4a454" />
+
+# 12 Techniques for caching and persisting RDDs and DataFrames.
 PySpark uses lazy evaluation, meaning transformations are not executed until an action is called. When a DataFrame/RDD is used multiple times, Spark can recompute it repeatedly, which is expensive.
 To avoid recomputation, Spark provides cache() and persist() to store RDD/DataFrame in memory or disk.
 # Cache():
@@ -176,3 +179,28 @@ cache() is a shorthand for persisting the data in memory only.
 * Future actions will reuse the cached data → faster.
 # persist():
 persist() allows you to specify the storage level (memory, disk, serialization).
+
+| Storage Level     | Meaning                                    |
+| ----------------- | ------------------------------------------ |
+| `MEMORY_ONLY`     | Store only in RAM                          |
+| `MEMORY_AND_DISK` | RAM first, spill to disk if not enough RAM |
+| `DISK_ONLY`       | Store only on disk                         |
+| `MEMORY_ONLY_SER` | Serialized format in memory                |
+| `OFF_HEAP`        | Store in off-heap memory (Tungsten)        |
+
+# 13 General DataFrame Functions:
+
+| Function           | Purpose                    |
+| ------------------ | -------------------------- |
+| show()             | Display DataFrame          |
+| collect()          | Return all rows to driver  |
+| take(n)            | Return first n rows        |
+| printSchema()      | Print column names + types |
+| count()            | Row count                  |
+| select()           | Select specific columns    |
+| filter() / where() | Filter rows                |
+| like()             | Pattern matching           |
+| sort()             | Sort rows                  |
+| describe()         | Summary statistics         |
+| columns            | List of column names       |
+
