@@ -155,6 +155,14 @@ A DataFrame in PySpark is a distributed collection of data organized into named 
 * It supports SQL queries
 * It automatically handles optimizations using Catalyst Optimizer
 * It is faster than RDDs due to optimized execution
+# 10.1 Operations on DataFrames, including filtering, selecting, and aggregating:
+
+# Filter:
+<img width="1266" height="770" alt="Screenshot 2025-11-25 105942" src="https://github.com/user-attachments/assets/319e73de-9421-4cc2-a2ca-8cf015eb4b8a" />
+
+# Selecting and aggregating:
+<img width="649" height="473" alt="Screenshot 2025-11-25 105538" src="https://github.com/user-attachments/assets/4b8c326d-ea94-4abe-a86c-4fcf859a539a" />
+
 # 11 Pyspark SQL:
 PySpark SQL allows you to write SQL queries on DataFrames.
 11.1 Integration of SQL Queries with PySpark
