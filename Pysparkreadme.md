@@ -371,9 +371,9 @@ Returns the absolute value.
 <img width="1026" height="542" alt="Screenshot 2025-11-25 181713" src="https://github.com/user-attachments/assets/d913dafb-3501-492d-a3c6-4b7d4e3b2408" />
 
 
-# 1. Date and Time Functions
+# 16. Date and Time Functions
 
-## 1.1 CURRENT_DATE()
+## 16.1 CURRENT_DATE()
 
 Returns the current system date.
 
@@ -383,7 +383,7 @@ df = spark.range(1).
 df.show()
 ```
 
-## 1.2 CURRENT_TIMESTAMP()
+## 16.2 CURRENT_TIMESTAMP()
 
 Returns the current timestamp.
 
@@ -393,7 +393,7 @@ df = spark.range(1).
 df.show()
 ```
 
-## 1.3 DATE_ADD()
+## 16.3 DATE_ADD()
 
 Adds days to a date.
 
@@ -401,7 +401,7 @@ Adds days to a date.
 df = df.withColumn("date_plus_5", F.date_add(F.current_date(), 5))
 ```
 
-## 1.4 DATEDIFF()
+## 16.4 DATEDIFF()
 
 Returns the number of days between two dates.
 
@@ -410,7 +410,7 @@ df = spark.createDataFrame([("2024-01-01", "2024-01-10")]).toDF("start", "end")
 df = df.withColumn("diff", F.datediff("end", "start"))
 ```
 
-## 1.5 YEAR()
+## 16.5 YEAR()
 
 Extracts year from date.
 
@@ -418,7 +418,7 @@ Extracts year from date.
 df = df.withColumn("year", F.year(F.current_date()))
 ```
 
-## 1.6 MONTH()
+## 16.6 MONTH()
 
 Extracts month from date.
 
@@ -426,7 +426,7 @@ Extracts month from date.
 df = df.withColumn("month", F.month(F.current_date()))
 ```
 
-## 1.7 DAY()
+## 16.7 DAY()
 
 Extracts day of month.
 
@@ -434,7 +434,7 @@ Extracts day of month.
 df = df.withColumn("day", F.dayofmonth(F.current_date()))
 ```
 
-## 1.8 TO_DATE()
+## 16.8 TO_DATE()
 
 Converts string to date.
 
@@ -443,7 +443,7 @@ df = spark.createDataFrame([("2024-11-10",)], ["dt_str"])
 df = df.withColumn("dt", F.to_date("dt_str"))
 ```
 
-## 1.9 DATE_FORMAT()
+## 16.9 DATE_FORMAT()
 
 Formats date to a specific pattern.
 
@@ -453,9 +453,9 @@ df = df.withColumn("formatted", F.date_format(F.current_date(), "dd-MM-yyyy"))
 
 ---
 
-# 2. Aggregate Functions
+# 17. Aggregate Functions
 
-## 2.1 mean()
+## 17.1 mean()
 
 Calculates mean.
 
@@ -463,7 +463,7 @@ Calculates mean.
 df.select(F.mean("value")).show()
 ```
 
-## 2.2 avg()
+## 17.2 avg()
 
 Alias of mean.
 
@@ -471,7 +471,7 @@ Alias of mean.
 df.select(F.avg("value")).show()
 ```
 
-## 2.3 collect_list()
+## 17.3 collect_list()
 
 Collects values into a list including duplicates.
 
@@ -479,7 +479,7 @@ Collects values into a list including duplicates.
 df.groupBy("id").agg(F.collect_list("value")).show()
 ```
 
-## 2.4 collect_set()
+## 17.4 collect_set()
 
 Collects unique values into a set.
 
@@ -487,7 +487,7 @@ Collects unique values into a set.
 df.groupBy("id").agg(F.collect_set("value")).show()
 ```
 
-## 2.5 countDistinct()
+## 17.5 countDistinct()
 
 Counts distinct values.
 
@@ -495,7 +495,7 @@ Counts distinct values.
 df.select(F.countDistinct("value")).show()
 ```
 
-## 2.6 count()
+## 17.6 count()
 
 Counts rows.
 
@@ -503,7 +503,7 @@ Counts rows.
 df.count()
 ```
 
-## 2.7 first()
+## 17.7 first()
 
 Returns first element.
 
@@ -511,7 +511,7 @@ Returns first element.
 df.select(F.first("value")).show()
 ```
 
-## 2.8 last()
+## 17.8 last()
 
 Returns last element.
 
@@ -519,7 +519,7 @@ Returns last element.
 df.select(F.last("value")).show()
 ```
 
-## 2.9 max()
+## 17.9 max()
 
 Returns maximum value.
 
@@ -527,7 +527,7 @@ Returns maximum value.
 df.select(F.max("value")).show()
 ```
 
-## 2.10 min()
+## 17.10 min()
 
 Returns minimum value.
 
@@ -535,7 +535,7 @@ Returns minimum value.
 df.select(F.min("value")).show()
 ```
 
-## 2.11 sum()
+## 17.11 sum()
 
 Returns sum of values.
 
@@ -545,7 +545,7 @@ df.select(F.sum("value")).show()
 
 ---
 
-# 3. Joins
+# 18. Joins
 
 Assume two DataFrames:
 
@@ -554,7 +554,7 @@ df1 = spark.createDataFrame([(1, "A"), (2, "B")], ["id", "value1"])
 df2 = spark.createDataFrame([(1, "X"), (3, "Y")], ["id", "value2"])
 ```
 
-## 3.1 Inner Join
+## 18.1 Inner Join
 
 Returns matching rows.
 
@@ -562,7 +562,7 @@ Returns matching rows.
 df1.join(df2, "id", "inner").show()
 ```
 
-## 3.2 Cross Join
+## 18.2 Cross Join
 
 Cartesian product.
 
@@ -570,7 +570,7 @@ Cartesian product.
 df1.crossJoin(df2).show()
 ```
 
-## 3.3 Outer Join (Full Outer)
+## 18.3 Outer Join (Full Outer)
 
 Returns matched + unmatched rows.
 
@@ -578,7 +578,7 @@ Returns matched + unmatched rows.
 df1.join(df2, "id", "outer").show()
 ```
 
-## 3.4 Left Join
+## 18.4 Left Join
 
 Returns all rows from left.
 
@@ -586,7 +586,7 @@ Returns all rows from left.
 df1.join(df2, "id", "left").show()
 ```
 
-## 3.5 Right Join
+## 18.5 Right Join
 
 Returns all rows from right.
 
@@ -594,7 +594,7 @@ Returns all rows from right.
 df1.join(df2, "id", "right").show()
 ```
 
-## 3.6 Left Semi Join
+## 18.6 Left Semi Join
 
 Returns rows from left when match exists, but only left columns.
 
@@ -602,7 +602,7 @@ Returns rows from left when match exists, but only left columns.
 df1.join(df2, "id", "left_semi").show()
 ```
 
-## 3.7 Left Anti Join
+## 18.7 Left Anti Join
 
 Returns rows from left *without* match.
 
