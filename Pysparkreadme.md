@@ -370,3 +370,242 @@ Returns the absolute value.
 
 <img width="1026" height="542" alt="Screenshot 2025-11-25 181713" src="https://github.com/user-attachments/assets/d913dafb-3501-492d-a3c6-4b7d4e3b2408" />
 
+
+# 1. Date and Time Functions
+
+## 1.1 CURRENT_DATE()
+
+Returns the current system date.
+
+```python
+df = spark.range(1).
+    withColumn("current_date", F.current_date())
+df.show()
+```
+
+## 1.2 CURRENT_TIMESTAMP()
+
+Returns the current timestamp.
+
+```python
+df = spark.range(1).
+    withColumn("current_ts", F.current_timestamp())
+df.show()
+```
+
+## 1.3 DATE_ADD()
+
+Adds days to a date.
+
+```python
+df = df.withColumn("date_plus_5", F.date_add(F.current_date(), 5))
+```
+
+## 1.4 DATEDIFF()
+
+Returns the number of days between two dates.
+
+```python
+df = spark.createDataFrame([("2024-01-01", "2024-01-10")]).toDF("start", "end")
+df = df.withColumn("diff", F.datediff("end", "start"))
+```
+
+## 1.5 YEAR()
+
+Extracts year from date.
+
+```python
+df = df.withColumn("year", F.year(F.current_date()))
+```
+
+## 1.6 MONTH()
+
+Extracts month from date.
+
+```python
+df = df.withColumn("month", F.month(F.current_date()))
+```
+
+## 1.7 DAY()
+
+Extracts day of month.
+
+```python
+df = df.withColumn("day", F.dayofmonth(F.current_date()))
+```
+
+## 1.8 TO_DATE()
+
+Converts string to date.
+
+```python
+df = spark.createDataFrame([("2024-11-10",)], ["dt_str"])
+df = df.withColumn("dt", F.to_date("dt_str"))
+```
+
+## 1.9 DATE_FORMAT()
+
+Formats date to a specific pattern.
+
+```python
+df = df.withColumn("formatted", F.date_format(F.current_date(), "dd-MM-yyyy"))
+```
+
+---
+
+# 2. Aggregate Functions
+
+## 2.1 mean()
+
+Calculates mean.
+
+```python
+df.select(F.mean("value")).show()
+```
+
+## 2.2 avg()
+
+Alias of mean.
+
+```python
+df.select(F.avg("value")).show()
+```
+
+## 2.3 collect_list()
+
+Collects values into a list including duplicates.
+
+```python
+df.groupBy("id").agg(F.collect_list("value")).show()
+```
+
+## 2.4 collect_set()
+
+Collects unique values into a set.
+
+```python
+df.groupBy("id").agg(F.collect_set("value")).show()
+```
+
+## 2.5 countDistinct()
+
+Counts distinct values.
+
+```python
+df.select(F.countDistinct("value")).show()
+```
+
+## 2.6 count()
+
+Counts rows.
+
+```python
+df.count()
+```
+
+## 2.7 first()
+
+Returns first element.
+
+```python
+df.select(F.first("value")).show()
+```
+
+## 2.8 last()
+
+Returns last element.
+
+```python
+df.select(F.last("value")).show()
+```
+
+## 2.9 max()
+
+Returns maximum value.
+
+```python
+df.select(F.max("value")).show()
+```
+
+## 2.10 min()
+
+Returns minimum value.
+
+```python
+df.select(F.min("value")).show()
+```
+
+## 2.11 sum()
+
+Returns sum of values.
+
+```python
+df.select(F.sum("value")).show()
+```
+
+---
+
+# 3. Joins
+
+Assume two DataFrames:
+
+```python
+df1 = spark.createDataFrame([(1, "A"), (2, "B")], ["id", "value1"])
+df2 = spark.createDataFrame([(1, "X"), (3, "Y")], ["id", "value2"])
+```
+
+## 3.1 Inner Join
+
+Returns matching rows.
+
+```python
+df1.join(df2, "id", "inner").show()
+```
+
+## 3.2 Cross Join
+
+Cartesian product.
+
+```python
+df1.crossJoin(df2).show()
+```
+
+## 3.3 Outer Join (Full Outer)
+
+Returns matched + unmatched rows.
+
+```python
+df1.join(df2, "id", "outer").show()
+```
+
+## 3.4 Left Join
+
+Returns all rows from left.
+
+```python
+df1.join(df2, "id", "left").show()
+```
+
+## 3.5 Right Join
+
+Returns all rows from right.
+
+```python
+df1.join(df2, "id", "right").show()
+```
+
+## 3.6 Left Semi Join
+
+Returns rows from left when match exists, but only left columns.
+
+```python
+df1.join(df2, "id", "left_semi").show()
+```
+
+## 3.7 Left Anti Join
+
+Returns rows from left *without* match.
+
+```python
+df1.join(df2, "id", "left_anti").show()
+```
