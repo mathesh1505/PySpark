@@ -547,6 +547,8 @@ df.select(F.sum("value")).show()
 
 ---
 
+<img width="1413" height="1026" alt="Screenshot 2025-11-27 111628" src="https://github.com/user-attachments/assets/6a29549f-260e-4b5f-b768-c15ffa62bbbf" />
+
 # 18. Joins
 
 Assume two DataFrames:
