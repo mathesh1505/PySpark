@@ -452,6 +452,8 @@ df = df.withColumn("formatted", F.date_format(F.current_date(), "dd-MM-yyyy"))
 ```
 
 ---
+<img width="1435" height="978" alt="image" src="https://github.com/user-attachments/assets/466b705e-90d0-4fbb-a361-1faf787de7af" />
+
 
 # 17. Aggregate Functions
 
