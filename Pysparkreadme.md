@@ -853,6 +853,7 @@ Returns rows from left *without* match.
 df1.join(df2, "id", "left_anti").show()
 ```
 
+<img width="1405" height="712" alt="Screenshot 2025-11-28 095510" src="https://github.com/user-attachments/assets/08033802-82fd-4c7a-bb28-3e6eba08cc82" />
 
 # 22. Mathematical Functions
 
@@ -913,6 +914,8 @@ df.select(F.sqrt(F.lit(25))).show()
 ```
 
 ---
+
+<img width="1210" height="794" alt="Screenshot 2025-11-27 155609" src="https://github.com/user-attachments/assets/879089e2-b74b-4b58-a8fc-418447185a03" />
 
 # 23. Conversion Functions
 
@@ -983,4 +986,5 @@ Returns previous row value.
 df.withColumn("prev_value", F.lag("value").over(w)).show()
 ```
 
----
+<img width="1389" height="628" alt="Screenshot 2025-11-27 175726" src="https://github.com/user-attachments/assets/1942c760-7f9e-473b-9155-90ca8d1380d3" />
+
