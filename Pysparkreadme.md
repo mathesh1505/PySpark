@@ -614,250 +614,11 @@ Returns rows from left *without* match.
 df1.join(df2, "id", "left_anti").show()
 ```
 
-# 19. Date and Time Functions
-
-## 19.1 CURRENT_DATE()
-
-Returns the current system date.
-
-```python
-df = spark.range(1).
-    withColumn("current_date", F.current_date())
-df.show()
-```
-
-## 19.2 CURRENT_TIMESTAMP()
-
-Returns the current timestamp.
-
-```python
-df = spark.range(1).
-    withColumn("current_ts", F.current_timestamp())
-df.show()
-```
-
-## 19.3 DATE_ADD()
-
-Adds days to a date.
-
-```python
-df = df.withColumn("date_plus_5", F.date_add(F.current_date(), 5))
-```
-
-## 19.4 DATEDIFF()
-
-Returns the number of days between two dates.
-
-```python
-df = spark.createDataFrame([("2024-01-01", "2024-01-10")]).toDF("start", "end")
-df = df.withColumn("diff", F.datediff("end", "start"))
-```
-
-## 19.5 YEAR()
-
-Extracts year from date.
-
-```python
-df = df.withColumn("year", F.year(F.current_date()))
-```
-
-## 19.6 MONTH()
-
-Extracts month from date.
-
-```python
-df = df.withColumn("month", F.month(F.current_date()))
-```
-
-## 19.7 DAY()
-
-Extracts day of month.
-
-```python
-df = df.withColumn("day", F.dayofmonth(F.current_date()))
-```
-
-## 19.8 TO_DATE()
-
-Converts string to date.
-
-```python
-df = spark.createDataFrame([("2024-11-10",)], ["dt_str"])
-df = df.withColumn("dt", F.to_date("dt_str"))
-```
-
-## 19.9 DATE_FORMAT()
-
-Formats date to a specific pattern.
-
-```python
-df = df.withColumn("formatted", F.date_format(F.current_date(), "dd-MM-yyyy"))
-```
-
----
-
-# 20. Aggregate Functions
-
-## 20.1 mean()
-
-Calculates mean.
-
-```python
-df.select(F.mean("value")).show()
-```
-
-## 20.2 avg()
-
-Alias of mean.
-
-```python
-df.select(F.avg("value")).show()
-```
-
-## 20.3 collect_list()
-
-Collects values into a list including duplicates.
-
-```python
-df.groupBy("id").agg(F.collect_list("value")).show()
-```
-
-## 20.4 collect_set()
-
-Collects unique values into a set.
-
-```python
-df.groupBy("id").agg(F.collect_set("value")).show()
-```
-
-## 20.5 countDistinct()
-
-Counts distinct values.
-
-```python
-df.select(F.countDistinct("value")).show()
-```
-
-## 20.6 count()
-
-Counts rows.
-
-```python
-df.count()
-```
-
-## 20.7 first()
-
-Returns first element.
-
-```python
-df.select(F.first("value")).show()
-```
-
-## 20.8 last()
-
-Returns last element.
-
-```python
-df.select(F.last("value")).show()
-```
-
-## 20.9 max()
-
-Returns maximum value.
-
-```python
-df.select(F.max("value")).show()
-```
-
-## 20.10 min()
-
-Returns minimum value.
-
-```python
-df.select(F.min("value")).show()
-```
-
-## 20.11 sum()
-
-Returns sum of values.
-
-```python
-df.select(F.sum("value")).show()
-```
-
----
-
-# 21. Joins
-
-Assume two DataFrames:
-
-```python
-df1 = spark.createDataFrame([(1, "A"), (2, "B")], ["id", "value1"])
-df2 = spark.createDataFrame([(1, "X"), (3, "Y")], ["id", "value2"])
-```
-
-## 21.1 Inner Join
-
-Returns matching rows.
-
-```python
-df1.join(df2, "id", "inner").show()
-```
-
-## 21.2 Cross Join
-
-Cartesian product.
-
-```python
-df1.crossJoin(df2).show()
-```
-
-## 21.3 Outer Join (Full Outer)
-
-Returns matched + unmatched rows.
-
-```python
-df1.join(df2, "id", "outer").show()
-```
-
-## 21.4 Left Join
-
-Returns all rows from left.
-
-```python
-df1.join(df2, "id", "left").show()
-```
-
-## 21.5 Right Join
-
-Returns all rows from right.
-
-```python
-df1.join(df2, "id", "right").show()
-```
-
-## 21.6 Left Semi Join
-
-Returns rows from left when match exists, but only left columns.
-
-```python
-df1.join(df2, "id", "left_semi").show()
-```
-
-## 21.7 Left Anti Join
-
-Returns rows from left *without* match.
-
-```python
-df1.join(df2, "id", "left_anti").show()
-```
-
 <img width="1405" height="712" alt="Screenshot 2025-11-28 095510" src="https://github.com/user-attachments/assets/08033802-82fd-4c7a-bb28-3e6eba08cc82" />
 
-# 22. Mathematical Functions
+# 19. Mathematical Functions
 
-## 22.1 ABS()
+## 19.1 ABS()
 
 Returns absolute value.
 
@@ -865,7 +626,7 @@ Returns absolute value.
 df.select(F.abs(F.lit(-10))).show()
 ```
 
-## 22.2 CEIL / CEILING
+## 19.2 CEIL / CEILING
 
 Rounds value up.
 
@@ -873,7 +634,7 @@ Rounds value up.
 df.select(F.ceil(F.lit(4.3))).show()
 ```
 
-## 22.3 FLOOR()
+## 19.3 FLOOR()
 
 Rounds value down.
 
@@ -881,7 +642,7 @@ Rounds value down.
 df.select(F.floor(F.lit(4.8))).show()
 ```
 
-## 22.4 EXP()
+## 19.4 EXP()
 
 Returns e^x.
 
@@ -889,7 +650,7 @@ Returns e^x.
 df.select(F.exp(F.lit(2))).show()
 ```
 
-## 22.5 LOG()
+## 19.5 LOG()
 
 Natural logarithm.
 
@@ -897,7 +658,7 @@ Natural logarithm.
 df.select(F.log(F.lit(10))).show()
 ```
 
-## 22.6 POWER()
+## 19.6 POWER()
 
 Raises number to a power.
 
@@ -905,7 +666,7 @@ Raises number to a power.
 df.select(F.pow(F.lit(3), 2)).show()
 ```
 
-## 22.7 SQRT()
+## 19.7 SQRT()
 
 Square root.
 
@@ -917,9 +678,9 @@ df.select(F.sqrt(F.lit(25))).show()
 
 <img width="1210" height="794" alt="Screenshot 2025-11-27 155609" src="https://github.com/user-attachments/assets/879089e2-b74b-4b58-a8fc-418447185a03" />
 
-# 23. Conversion Functions
+# 20. Conversion Functions
 
-## 23.1 CAST()
+## 20.1 CAST()
 
 Converts data type.
 
@@ -930,7 +691,7 @@ df = df.withColumn("age_int", F.col("age_str").cast("int"))
 
 ---
 
-# 24. Window Functions
+# 21. Window Functions
 
 ```python
 from pyspark.sql.window import Window
@@ -946,7 +707,7 @@ df = spark.createDataFrame([
 w = Window.partitionBy("category").orderBy("value")
 ```
 
-## 24.1 ROW_NUMBER()
+## 21.1 ROW_NUMBER()
 
 Gives unique sequential number.
 
@@ -954,7 +715,7 @@ Gives unique sequential number.
 df.withColumn("row_num", F.row_number().over(w)).show()
 ```
 
-## 24.2 RANK()
+## 22.2 RANK()
 
 Gives rank with gaps.
 
@@ -962,7 +723,7 @@ Gives rank with gaps.
 df.withColumn("rank", F.rank().over(w)).show()
 ```
 
-## 24.3 DENSE_RANK()
+## 21.3 DENSE_RANK()
 
 Rank without gaps.
 
@@ -970,7 +731,7 @@ Rank without gaps.
 df.withColumn("dense_rank", F.dense_rank().over(w)).show()
 ```
 
-## 24.4 LEAD()
+## 21.4 LEAD()
 
 Returns next row value.
 
@@ -978,7 +739,7 @@ Returns next row value.
 df.withColumn("next_value", F.lead("value").over(w)).show()
 ```
 
-## 24.5 LAG()
+## 21.5 LAG()
 
 Returns previous row value.
 
