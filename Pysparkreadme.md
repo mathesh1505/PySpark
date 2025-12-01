@@ -749,3 +749,124 @@ df.withColumn("prev_value", F.lag("value").over(w)).show()
 
 <img width="1389" height="628" alt="Screenshot 2025-11-27 175726" src="https://github.com/user-attachments/assets/1942c760-7f9e-473b-9155-90ca8d1380d3" />
 
+## 3. Reading Different File Formats with Schema
+
+### **3.1 Reading CSV with Schema**
+
+Used to read CSV files while applying a predefined schema.
+
+**Example:**
+
+```python
+schema = StructType([
+    StructField("id", IntegerType(), True),
+    StructField("name", StringType(), True),
+    StructField("age", IntegerType(), True)
+])
+
+df = spark.read.format("csv").option("header", "true").schema(schema).load("path/file.csv")
+```
+
+---
+
+### **3.2 Reading Parquet**
+
+Parquet is a columnar format; schema is automatically preserved.
+
+**Example:**
+
+```python
+df = spark.read.parquet("path/file.parquet")
+```
+
+---
+
+### **3.3 Reading JSON with Schema**
+
+JSON files can be read with a predefined schema.
+
+**Example:**
+
+```python
+schema = StructType([
+    StructField("id", IntegerType(), True),
+    StructField("details", StructType([
+        StructField("name", StringType(), True),
+        StructField("age", IntegerType(), True)
+    ]))
+])
+
+df = spark.read.schema(schema).json("path/file.json")
+```
+
+---
+
+## 4. Writing Different File Formats with Schema
+
+### **4.1 Write DataFrame to CSV**
+
+Writes output as CSV.
+
+**Example:**
+
+```python
+df.write.option("header", "true").mode("overwrite").csv("path/output.csv")
+```
+
+---
+
+### **4.2 Write DataFrame to Parquet**
+
+Parquet automatically stores schema.
+
+**Example:**
+
+```python
+df.write.mode("overwrite").parquet("path/output.parquet")
+```
+
+---
+
+### **4.3 Write DataFrame to JSON**
+
+Writes JSON data.
+
+**Example:**
+
+```python
+df.write.mode("overwrite").json("path/output.json")
+```
+
+---
+
+## 5. Slowly Changing Dimensions (SCD)
+
+Used in Data Warehousing to manage changing data.
+
+### **5.1 SCD Type 1 (Overwrite)**
+
+* No history maintained.
+* Old data is overwritten by new data.
+
+**Use Case:** Correcting wrong values.
+
+---
+
+### **5.2 SCD Type 2 (History Tracking)**
+
+* Maintains full history.
+* Adds new rows instead of updating.
+* Usually uses: start_date, end_date, is_current flags.
+
+**Use Case:** Customer address history.
+
+---
+
+### **5.3 SCD Type 3 (Limited History)**
+
+* Stores limited number of previous values.
+* Adds new columns like: previous_address.
+
+**Use Case:** Track only most recent change.
+
+
