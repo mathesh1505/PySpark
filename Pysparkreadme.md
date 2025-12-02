@@ -870,3 +870,147 @@ Used in Data Warehousing to manage changing data.
 **Use Case:** Track only most recent change.
 
 
+## 1. Write Methods
+
+These methods define how data is written into tables or files in Spark.
+
+### **1.1 Overwrite**
+
+* Replaces existing data completely.
+* Deletes old data and writes fresh data.
+
+**Example:**
+
+```python
+df.write.mode("overwrite").parquet("/path/output")
+```
+
+---
+
+### **1.2 Overwrite Partition**
+
+* Overwrites only specific partitions instead of the whole table.
+* Saves time and storage.
+
+**Example:**
+
+```python
+df.write.mode("overwrite").option("replaceWhere", "year = 2023").saveAsTable("sales")
+```
+
+---
+
+### **1.3 Upsert (Merge)**
+
+* Updates existing records and inserts new records.
+* Used in Delta Lake using `MERGE INTO`.
+
+**Example:**
+
+```sql
+MERGE INTO target t
+USING source s
+ON t.id = s.id
+WHEN MATCHED THEN UPDATE SET *
+WHEN NOT MATCHED THEN INSERT *;
+```
+
+---
+
+### **1.4 Append**
+
+* Adds new data to an existing dataset.
+* Does not modify old data.
+
+**Example:**
+
+```python
+df.write.mode("append").json("/path/output")
+```
+
+---
+
+## 2. Table Types
+
+Spark SQL supports two types of tables: Managed and External.
+
+### **2.1 Managed Table**
+
+* Spark manages both **metadata and data**.
+* Dropping the table removes data from storage.
+
+**Creation Example:**
+
+```sql
+CREATE TABLE emp (id INT, name STRING)
+USING PARQUET;
+```
+
+---
+
+### **2.2 External Table**
+
+* Spark manages only metadata.
+* Data lives outside the warehouse.
+* Dropping the table **does not delete** the data.
+
+**Creation Example:**
+
+```sql
+CREATE TABLE emp_ext
+USING CSV
+LOCATION '/data/employees';
+```
+
+---
+
+## 3. Types of Loads
+
+Different ETL patterns to ingest data.
+
+### **3.1 Full Load**
+
+* Loads the entire dataset every time.
+* Old data is completely replaced.
+
+**Use Case:** Small lookup tables.
+
+---
+
+### **3.2 Incremental Load**
+
+* Loads only new or changed records since the last run.
+* Based on timestamp or numeric incremental key.
+
+**Use Case:** Transaction updates.
+
+---
+
+### **3.3 Snapshot Load**
+
+Captures the state of data at a specific point in time.
+
+#### **a) Full Snapshot**
+
+* Load the complete snapshot of the whole table every time.
+
+#### **b) Incremental Snapshot**
+
+* Loads only changed data but maintains full snapshot history.
+
+#### **c) Rolling Snapshot**
+
+* Loads snapshots for a rolling window (e.g., last 30 days).
+
+---
+
+### **3.4 Change Data Capture (CDC)**
+
+* Captures only **insert, update, delete** changes.
+* Typically used with Delta Lake, Debezium, or Kafka.
+
+**Use Case:** Real-time data synchronization.
+
+---
+
+
