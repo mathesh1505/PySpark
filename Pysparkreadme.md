@@ -1013,4 +1013,103 @@ Captures the state of data at a specific point in time.
 
 ---
 
+# 1. Cookiecutter
+
+Cookiecutter is a command-line utility that creates projects from **templates**. It is widely used to standardize folder structures in data engineering, ML, and software projects.
+
+## **What it does**
+
+* Generates project structures automatically
+* Enforces standardization
+* Removes repetitive manual setup
+* Supports Jinja templates
+
+## **Example Output Structure**
+
+```
+project_name/
+    ├── README.md
+    ├── setup.py
+    ├── project_name/
+    └── tests/
+```
+
+---
+
+# 2. Pydantic
+
+Pydantic is a Python library used for **data validation** and **data parsing** using Python type hints.
+
+## **Why it's used**
+
+* Ensures data is valid before processing
+* Converts data types automatically
+* Widely used in FastAPI, ETL pipelines, and config management
+
+# 3. Tox & Black
+
+## 3.1 Tox
+
+Tox is a **test automation tool** used to:
+
+* Run tests in different Python environments
+* Automate linting, building, dependency checks
+* Standardize development workflow
+
+### **Install**
+
+```bash
+pip install tox
+```
+
+### **Basic tox.ini**
+
+```ini
+[tox]
+envlist = py39
+
+[testenv]
+deps = pytest
+commands = pytest
+```
+
+### **Run tox**
+
+```bash
+tox
+```
+
+---
+
+## 3.2 Black
+
+Black is a **code formatter** that enforces consistent style.
+
+### **Why use Black**
+
+* Enforces PEP8 automatically
+* Removes manual formatting effort
+* Same formatting for entire team
+
+### **Install**
+
+```bash
+pip install black
+```
+
+### **Format a file**
+
+```bash
+black my_script.py
+```
+
+### **Format entire project**
+
+```bash
+black .
+```
+
+
+
+
 
